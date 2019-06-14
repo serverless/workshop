@@ -24,23 +24,28 @@ Clone `the-serverless-way` repository
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
 
+---
+
 In `/workshop/template-fullstack/backend/functions` install npm dependencies.
 
 ```text
 $ npm i
 ```
+---
 
 In `/workshop/template-fullstack/frontend` install npm dependencies.
 
 ```text
 $ npm i
 ```
+---
 
 Build the front-end application.
 
 ```text
 $ npm run build
 ```
+---
 
 In `/workshop/template-fullstack/backend/frontend` run `login`
 
@@ -51,6 +56,8 @@ $ serverless login
 Login or register for Serverless Framework Enterprise.  Verify your email if you are just signing up for the first time.
 
 Make sure you create a `tenant` and an `app`.
+
+---
 
 In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/backend/frontend/serverless.yml` change the following...
 
@@ -79,6 +86,7 @@ In `/workshop/template-fullstack/backend/database` run `deploy` to deploy the ba
 ```text
 $ serverless deploy --stage dev
 ```
+---
 
 In `/workshop/template-fullstack/backend/functions` run `deploy` to deploy the backend code.
 
@@ -88,11 +96,15 @@ $ serverless deploy --stage dev
 
 Copy the URL of the function that is listed after successful deploy.
 
-In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service.
+---
+
+In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
 
 ```text
 $ serverless deploy --stage dev
 ```
+
+---
 
 In `/workshop/template-fullstack/backend/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
 
@@ -118,6 +130,8 @@ $ sls info
 
 You can also see this information in the Serverless Framework Enterprise Dashboard.
 
+---
+
 In `/workshop/template-fullstack/backend/functions`, invoke the live function.
 
 ```text
@@ -126,6 +140,8 @@ $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski
 
 (You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
 
+---
+
 In `/workshop/template-fullstack/backend/functions`, invoke the function locally.
 
 ```text
@@ -133,6 +149,8 @@ $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@l
 ```
 
 (You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
+
+---
 
 In `/workshop/template-fullstack/backend/functions`, add a log statement to the beginning of your function.
 
@@ -146,13 +164,17 @@ Then run this command to deploy only your function and not trigger a CloudFormat
 $ sls deploy function -f formSubmit
 ```
 
+---
+
 In `/workshop/template-fullstack/backend/functions`, invoke the live function, but also pass in the logs flag.
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff3","email":"jeff@lebowski3"}}' -l
 ```
 
-See the logs from Cloudwatch come with the response.
+You should see the logs from Cloudwatch come with the response.
+
+---
 
 In `/workshop/template-fullstack/backend/functions`, open up a new CLI session and run this command to stream logs into your CLI.
 
@@ -168,6 +190,8 @@ $ sls invoke -f formSubmit --data '{"body":{"name":"jeff4","email":"jeff@lebowsk
 
 The logs should stream in.
 
+---
+
 In `/workshop/template-fullstack/backend/functions`, remove the log statement and run a full deploy again.
 
 ```text
@@ -175,6 +199,8 @@ $ sls deploy --force
 ```
 
 (Use `--force` in case it tries to skip deployment because it hasn't detected a change.)
+
+---
 
 In `/workshop/template-fullstack/backend/functions`, list recent deployments.
 
