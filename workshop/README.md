@@ -14,6 +14,8 @@ These are the items you will need for the Workshop.
 
 * **Amazon Web Services Account Credentials** – Each developer must have Access Keys to their own AWS account with Admin Access.  These Access Keys must be saved on the developer's machine.  The Serverless Framework will use these to provision resources on the account.  You can learn how to create these Access Keys here: https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
+<br/>
+
 ## Hands-On: Fullstack
 
 ### Setup
