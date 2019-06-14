@@ -83,8 +83,6 @@ $ serverless client deploy
 ```
 Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
 
-### Use
-
 <br/>
 
 ## Development Cheatsheet
