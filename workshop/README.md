@@ -20,7 +20,7 @@ These are the items you will need for the Workshop.
 
 ### Setup
 
-#### Clone `the-serverless-way` repository
+Clone `the-serverless-way` repository
 
 ```bash
 $ git clone https://www.github.com/serverless/the-serverless-way
@@ -36,6 +36,13 @@ In `/workshop/template-fullstack/frontend` install npm dependencies
 
 ```bash
 $ npm i
+```
+
+Then build the front-end application
+
+
+```bash
+$ npm run build
 ```
 
 In `/workshop/template-fullstack/backend/` run `login`
@@ -58,10 +65,18 @@ custom:
     bucketName: myWebsiteBucket # put a universally unique bucket name here
 ```
 
+### Deployment
+
 You may need to login twice if you are registering for the first time.
 
-In `/workshop/template-fullstack/backend/` run `deploy``
+In `/workshop/template-fullstack/backend/` run `deploy` to deploy the backend
 
 ```bash
 $ serverless deploy
+```
+
+In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend
+
+```bash
+$ serverless client deploy
 ```
