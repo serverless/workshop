@@ -16,9 +16,7 @@ These are the items you will need for the Workshop.
 
 <br/>
 
-## Hands-On: Fullstack
-
-### Setup
+## Hands-On: Fullstack – Setup
 
 Clone `the-serverless-way` repository
 
@@ -72,7 +70,7 @@ custom:
 
 <br/>
 
-### Deployment
+## Hands-On: Fullstack – Deployment
 
 Note: You may need to login twice if you registered for the first time and just verified your email address.
 
@@ -110,7 +108,7 @@ Check out the Serverless Framework Enterprise Dashboard to see the invocation.
 
 <br/>
 
-### Development
+## Hands-On: Fullstack – Development
 
 In `/workshop/template-fullstack/backend/functions`, check to see what has been deployed.
 
@@ -189,3 +187,15 @@ Timestamps are used to identify deployments.  The Framework saves old CloudForma
 ```text
 $ sls rollback -t 1476790110568
 ```
+
+<br/>
+
+## Hands-On: Fullstack – Stages
+
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a `dev`, `qa` and `prod` Stage in your Application.
+
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a Profile for development called `proile-dev` and associate it with your Application's `dev` stage.
+
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and create a Secret.
+
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and add a Safeguard for `allowed-regions`
