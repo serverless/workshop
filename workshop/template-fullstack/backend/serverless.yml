@@ -8,7 +8,6 @@ provider:
   region: us-east-1
   stage: dev
   environment:
-    foo: ${secrets:foo}
 
 functions:
   formSubmit:
@@ -24,5 +23,5 @@ plugins:
 
 custom:
   client:
-    bucketName: demo-fullstack-89aja9j # Change this to a universally unique bucket name
+    bucketName: demo-fullstack-ja189j # Change this to a universally unique bucket name
     distributionFolder: ../frontend/build

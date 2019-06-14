@@ -1,5 +1,7 @@
 # The Serverless Way - Workshop
 
+<br/>
+
 ## Prerequisites
 
 These are the items you will need for the Workshop.
@@ -12,31 +14,39 @@ These are the items you will need for the Workshop.
 
 * **Amazon Web Services Account Credentials** – Each developer must have Access Keys to their own AWS account with Admin Access.  These Access Keys must be saved on the developer's machine.  The Serverless Framework will use these to provision resources on the account.  You can learn how to create these Access Keys here: https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
+<br/>
+
 ## Hands-On: Fullstack
 
 ### Setup
 
-#### Clone `the-serverless-way` repository
+Clone `the-serverless-way` repository
 
-```bash
+```text
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
 
 In `/workshop/template-fullstack/backend` install npm dependencies
 
-```bash
+```text
 $ npm i
 ```
 
 In `/workshop/template-fullstack/frontend` install npm dependencies
 
-```bash
+```text
 $ npm i
+```
+
+Then build the front-end application
+
+```text
+$ npm run build
 ```
 
 In `/workshop/template-fullstack/backend/` run `login`
 
-```bash
+```text
 $ serverless login
 ```
 
@@ -54,10 +64,49 @@ custom:
     bucketName: myWebsiteBucket # put a universally unique bucket name here
 ```
 
+### Deployment
+
 You may need to login twice if you are registering for the first time.
 
-In `/workshop/template-fullstack/backend/` run `deploy``
+In `/workshop/template-fullstack/backend/` run `deploy` to deploy the backend
 
-```bash
+```text
 $ serverless deploy
 ```
+
+Copy the backend URL
+
+In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
+
+```text
+$ serverless client deploy
+```
+Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
+
+<br/>
+
+## Development Cheatsheet
+
+```text
+$ sls info
+```
+
+Get information about the current deployment.
+
+```text
+$ sls invoke local -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
+```
+
+Call the function locally.
+
+```text
+$ sls deploy
+```
+
+Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
+
+```text
+$ sls deploy function -f formSubmit
+```
+
+Deploy a single function without triggering a CloudFormation deployment.  This is much faster.

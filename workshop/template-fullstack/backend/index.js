@@ -4,9 +4,10 @@
 
 const submit = (event, context, callback) => {
 
+  // A hack that crashes the function
   if (event['queryStringParameters'] && event['queryStringParameters']['error']) {
     let r = Math.random().toString(36).substring(7);
-    throw new Error(`Random error ${r}`)
+    throw new Error(`Self-inflicted function crash: ${r}`)
   }
 
   callback(null, {
@@ -15,7 +16,10 @@ const submit = (event, context, callback) => {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
     },
-    body: JSON.stringify({ message: 'form submission received' }),
+    body: JSON.stringify({
+      message: 'form submission received',
+      data: event 
+    }),
   })
 }
 
