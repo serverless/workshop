@@ -16,7 +16,7 @@ These are the items you will need for the Workshop.
 
 <br/>
 
-## Hands-On: Fullstack – Setup
+## Hands-On: Setup
 
 Clone `the-serverless-way` repository
 
@@ -77,7 +77,7 @@ custom:
 
 <br/>
 
-## Hands-On: Fullstack – Deployment
+## Hands-On: Deployment
 
 Note: You may need to login twice if you registered for the first time and just verified your email address.
 
@@ -120,7 +120,7 @@ Check out the Serverless Framework Enterprise Dashboard to see the invocation.
 
 <br/>
 
-## Hands-On: Fullstack – Development
+## Hands-On: Development
 
 In `/workshop/template-fullstack/backend/functions`, check to see what has been deployed.
 
@@ -216,7 +216,7 @@ $ sls rollback -t 1476790110568
 
 <br/>
 
-## Hands-On: Fullstack – Stages
+## Hands-On: Stage Set-up
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a `dev`, `qa` and `prod` Stage in your Application.
 
@@ -239,7 +239,9 @@ provider:
     foo: ${secret:foo}
 ```
 
-This changes across stages automatically.
+This changes across stages automatically.  Deploy this.
+
+View the deployment record in Serverless Framework Enterprise.
 
 ---
 
@@ -249,7 +251,7 @@ In `/workshop/template-fullstack/backend/functions`, run a full deployment and l
 
 <br/>
 
-## Hands-On: Fullstack – Testing
+## Hands-On: Testing
 
 In `/workshop/template-fullstack/backend/functions`, run the test command.
 
@@ -301,3 +303,9 @@ jobs:
             - node_modules
           key: dependencies-cache-{{ checksum "package.json" }}
 ```
+
+<br/>
+
+## Follow Along: Operations
+
+In the frontend website, click on `Demo Utilities` on the top right and click the button to generate a few function errors.  Also enter `1000` API Requests.
