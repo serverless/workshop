@@ -107,8 +107,8 @@ $ sls deploy
 
 Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
 
-```console
-$ sls deploy function -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
+```text
+$ sls deploy function -f formSubmit
 ```
 
 Deploy a single function without triggering a CloudFormation deployment.  This is much faster.
