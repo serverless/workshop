@@ -81,5 +81,31 @@ In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the fro
 ```bash
 $ serverless client deploy
 ```
-Go to the link, click on `Demo Utilities` and add the API URL.
+Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
+
+### Use
+
+<br/>
+
+## Development Cheatsheet
+
+### `$ sls info`
+
+Get information about the current deployment.
+
+### `$ sls invoke local -f formSubmit`
+
+Call the function locally.
+
+### `$ sls deploy`
+
+Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
+
+### `$ sls deploy function -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'`
+
+Deploy a single function without triggering a CloudFormation deployment.  This is much faster.
+
+
+
+
 
