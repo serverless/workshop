@@ -220,8 +220,23 @@ $ sls rollback -t 1476790110568
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a `dev`, `qa` and `prod` Stage in your Application.
 
+---
+
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a Profile for development called `proile-dev` and associate it with your Application's `dev` stage.
+
+---
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and create a Secret.
 
+---
+
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and add a Safeguard for `allowed-regions`
+
+<br/>
+
+## Hands-On: Fullstack – Stages
+
+
+
+
+
