@@ -1,15 +1,13 @@
 {
-  "name": "sfe-demo-leadcapture",
+  "name": "fullstack-functions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "author": "Serverless.com",
   "license": "MIT",
-  "dependencies": {
-    "serverless-finch": "^2.4.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@serverless/enterprise-plugin": "latest"
+    "aws-sdk": "^2.475.0"
   }
 }

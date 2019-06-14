@@ -1,0 +1,34 @@
+tenant: ac360 # Enter your tenant name here
+app: demos # Enter your application name here
+service: fullstack-database
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+
+custom: # Centralize variables here
+  stage: ${opt:stage, self:provider.stage}
+  database_submissions_name: submissions-${self:custom.stage}
+  database_submissions_region: submissions-${self:provider.region}
+
+resources:
+  Resources:
+    Submissions:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.database_submissions_name}
+
+outputs:
+  database_submissions_name: ${self:custom.database_submissions_name}
+  database_submissions_region: ${self:custom.database_submissions_region}

@@ -1,22 +1,11 @@
 tenant: ac360 # Enter your tenant name here
 app: demos # Enter your application name here
-service: fullstack
+service: fullstack-website
 
 provider:
   name: aws
   runtime: nodejs8.10
   region: us-east-1
-  stage: dev
-  environment:
-
-functions:
-  formSubmit:
-    handler: index.submit
-    events:
-      - http:
-          path: submit
-          method: post
-          cors: true
 
 plugins:
   - serverless-finch
@@ -24,4 +13,4 @@ plugins:
 custom:
   client:
     bucketName: demo-fullstack-ja189j # Change this to a universally unique bucket name
-    distributionFolder: ../frontend/build
+    distributionFolder: ./build

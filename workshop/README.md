@@ -26,62 +26,121 @@ Clone `the-serverless-way` repository
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
 
-In `/workshop/template-fullstack/backend` install npm dependencies
+In `/workshop/template-fullstack/backend/functions` install npm dependencies.
 
 ```text
 $ npm i
 ```
 
-In `/workshop/template-fullstack/frontend` install npm dependencies
+In `/workshop/template-fullstack/frontend` install npm dependencies.
 
 ```text
 $ npm i
 ```
 
-Then build the front-end application
+Build the front-end application.
 
 ```text
 $ npm run build
 ```
 
-In `/workshop/template-fullstack/backend/` run `login`
+In `/workshop/template-fullstack/backend/database` run `login`
 
 ```text
 $ serverless login
 ```
 
-Verify your email if you are just signing up for the first time.
+Login or register for Serverless Framework Enterprise.  Verify your email if you are just signing up for the first time.
 
-In `/workshop/template-fullstack/backend/serverless.yml` change the following
+Make sure you create a `tenant` and an `app`.
+
+In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/backend/frontend/serverless.yml` change the following...
 
 ```yaml
 tenant: mytenant # Put your tenant name here
 app: myapp # put your app name here
 service: myservice # put your service name here
+```
 
+In `/workshop/template-fullstack/backend/frontend/serverless.yml` change the bucket name to be universally unique.
+
+```yaml
 custom:
   client:
     bucketName: myWebsiteBucket # put a universally unique bucket name here
 ```
 
+<br/>
+
 ### Deployment
 
-You may need to login twice if you are registering for the first time.
+Note: You may need to login twice if you registered for the first time and just verified your email address.
 
-In `/workshop/template-fullstack/backend/` run `deploy` to deploy the backend
+In `/workshop/template-fullstack/backend/database` run `deploy` to deploy the backend database.
 
 ```text
-$ serverless deploy
+$ serverless deploy --stage dev
 ```
 
-Copy the backend URL
+In `/workshop/template-fullstack/backend/functions` run `deploy` to deploy the backend code.
 
-In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
+```text
+$ serverless deploy --stage dev
+```
+
+Copy the URL of the function that is listed after successful deploy.
+
+In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service.
+
+```text
+$ serverless deploy --stage dev
+```
+
+In `/workshop/template-fullstack/backend/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
 
 ```text
 $ serverless client deploy
 ```
+
 Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
+
+Enter some information into the submission form.  Review the Developer Tools and inspect the Network request.
+
+Check out the Serverless Framework Enterprise Dashboard to see the invocation.
+
+<br/>
+
+### Development
+
+In `/workshop/template-fullstack/backend/functions`, check to see what has been deployed.
+
+```text
+$ sls info
+```
+
+You can also see this information in the Serverless Framework Enterprise Dashboard.
+
+In `/workshop/template-fullstack/backend/functions`, invoke the live function.
+
+```text
+$ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
+```
+
+In `/workshop/template-fullstack/backend/functions`, invoke the function locally.
+
+```text
+$ sls invoke local -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
+```
+
+
+
+
+
+
+
+
+
+
 
 <br/>
 
@@ -94,7 +153,7 @@ $ sls info
 Get information about the current deployment.
 
 ```text
-$ sls invoke local -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
+$ sls invoke local -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
 ```
 
 Call the function locally.
@@ -110,3 +169,21 @@ $ sls deploy function -f formSubmit
 ```
 
 Deploy a single function without triggering a CloudFormation deployment.  This is much faster.
+
+```text
+$ sls logs -f formSubmit -t
+```
+
+Stream logs for the specific function into your terminal.
+
+```text
+$ sls deploy list
+```
+
+List recent deployments.  Timestamps are used to identify them.
+
+```text
+$ sls rollback -t 1476790110568
+```
+
+Roll back to a previous deployment by specifying a timestamp found by first running `sls deploy list`.  This triggers a CloudFormation update to that CloudFormation state, which is automatically saved by the Serverless Framework.
