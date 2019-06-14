@@ -44,7 +44,7 @@ Build the front-end application.
 $ npm run build
 ```
 
-In `/workshop/template-fullstack/backend/database` run `login`
+In `/workshop/template-fullstack/backend/frontend` run `login`
 
 ```text
 $ serverless login
@@ -126,64 +126,66 @@ In `/workshop/template-fullstack/backend/functions`, invoke the live function.
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
 ```
 
+(You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
+
 In `/workshop/template-fullstack/backend/functions`, invoke the function locally.
 
 ```text
-$ sls invoke local -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
+$ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@lebowski2"}}'
 ```
 
+(You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
 
+In `/workshop/template-fullstack/backend/functions`, add a log statement to the beginning of your function.
 
-
-
-
-
-
-
-
-
-<br/>
-
-## Development Cheatsheet
-
-```text
-$ sls info
+```javascript
+console.log('hello world')
 ```
 
-Get information about the current deployment.
-
-```text
-$ sls invoke local -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
-```
-
-Call the function locally.
-
-```text
-$ sls deploy
-```
-
-Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
+Then run this command to deploy only your function and not trigger a CloudFormation update.  This is a much faster way to deploy.
 
 ```text
 $ sls deploy function -f formSubmit
 ```
 
-Deploy a single function without triggering a CloudFormation deployment.  This is much faster.
+In `/workshop/template-fullstack/backend/functions`, invoke the live function, but also pass in the logs flag.
+
+```text
+$ sls invoke -f formSubmit --data '{"body":{"name":"jeff3","email":"jeff@lebowski3"}}' -l
+```
+
+See the logs from Cloudwatch come with the response.
+
+In `/workshop/template-fullstack/backend/functions`, open up a new CLI session and run this command to stream logs into your CLI.
 
 ```text
 $ sls logs -f formSubmit -t
 ```
 
-Stream logs for the specific function into your terminal.
+Call the function again to see logs stream in:
+
+```text
+$ sls invoke -f formSubmit --data '{"body":{"name":"jeff4","email":"jeff@lebowski4"}}' -l
+```
+
+The logs should stream in.
+
+In `/workshop/template-fullstack/backend/functions`, remove the log statement and run a full deploy again.
+
+```text
+$ sls deploy --force
+```
+
+(Use `--force` in case it tries to skip deployment because it hasn't detected a change.)
+
+In `/workshop/template-fullstack/backend/functions`, list recent deployments.
 
 ```text
 $ sls deploy list
 ```
 
-List recent deployments.  Timestamps are used to identify them.
+Timestamps are used to identify deployments.  The Framework saves old CloudFormation templates for you.  You can use them to rollback.  This is great if you get into trouble.
 
 ```text
 $ sls rollback -t 1476790110568
 ```
-
-Roll back to a previous deployment by specifying a timestamp found by first running `sls deploy list`.  This triggers a CloudFormation update to that CloudFormation state, which is automatically saved by the Serverless Framework.
