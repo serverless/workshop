@@ -22,31 +22,31 @@ These are the items you will need for the Workshop.
 
 Clone `the-serverless-way` repository
 
-```bash
+```text
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
 
 In `/workshop/template-fullstack/backend` install npm dependencies
 
-```bash
+```text
 $ npm i
 ```
 
 In `/workshop/template-fullstack/frontend` install npm dependencies
 
-```bash
+```text
 $ npm i
 ```
 
 Then build the front-end application
 
-```bash
+```text
 $ npm run build
 ```
 
 In `/workshop/template-fullstack/backend/` run `login`
 
-```bash
+```text
 $ serverless login
 ```
 
@@ -70,7 +70,7 @@ You may need to login twice if you are registering for the first time.
 
 In `/workshop/template-fullstack/backend/` run `deploy` to deploy the backend
 
-```bash
+```text
 $ serverless deploy
 ```
 
@@ -78,7 +78,7 @@ Copy the backend URL
 
 In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
 
-```bash
+```text
 $ serverless client deploy
 ```
 Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
@@ -89,19 +89,19 @@ Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
 
 ## Development Cheatsheet
 
-```bash
+```text
 $ sls info
 ```
 
 Get information about the current deployment.
 
-```
-$ sls invoke local -f formSubmit
+```text
+$ sls invoke local -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
 ```
 
 Call the function locally.
 
-```bash
+```text
 $ sls deploy
 ```
 
