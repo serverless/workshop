@@ -107,7 +107,7 @@ $ sls deploy
 
 Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
 
-```bash
+```shell
 $ sls deploy function -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
 ```
 
