@@ -222,21 +222,82 @@ In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create 
 
 ---
 
-In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a Profile for development called `proile-dev` and associate it with your Application's `dev` stage.
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a Profile for development called `profile-dev` and associate it with your Application's `dev` stage.
 
 ---
 
-In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and create a Secret.
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and create a Secret called `foo`.
+
+In `/workshop/template-fullstack/backend/functions`, put the Secret in the environment variables of the `formSubmit` functions, like this:
+
+```yaml
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  environment:
+    foo: ${secret:foo}
+```
+
+This changes across stages automatically.
 
 ---
 
-In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `proile-dev` and add a Safeguard for `allowed-regions`
+In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and add a Safeguard for `allowed-regions`
+
+In `/workshop/template-fullstack/backend/functions`, run a full deployment and look at the Safegaurds outputs.
 
 <br/>
 
-## Hands-On: Fullstack – Stages
+## Hands-On: Fullstack – Testing
 
+In `/workshop/template-fullstack/backend/functions`, run the test command.
 
+```text
+$ sls test
+```
 
+This uses `serverless.test.yml` to test the live cloud deployment and should return a successful response.
 
+---
 
+Here is what a common coniguration of Serverless Framework looks like in CI/CD.  Source is here:  (CI/CD Workflow For Serverless Apps with CircleCI)[https://serverless.com/blog/ci-cd-workflow-serverless-apps-with-circleci/]
+
+```yaml
+jobs:
+  build:
+    ...
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache
+
+      - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            sudo npm i -g serverless
+            npm install
+
+      - run:
+          name: Run tests with code coverage
+          command: npm test --coverage
+
+      - run:
+          name: Deploy application
+          command: sls deploy -v --stage qa # Add stage and -v flag to show CloudFormation activity
+
+      - run:
+          name: Deploy application
+          command: sls test
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-cache-{{ checksum "package.json" }}
+```

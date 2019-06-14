@@ -1,0 +1,14 @@
+- name: form submission endpoint returns 200
+  endpoint:
+    function: formSubmit
+  request:
+    headers:
+      Foo: bar
+    body:
+      email: jeff@lebowski.com
+      name: Jeff Lebowski
+  response:
+    status: 200
+    body:
+      message: success
+      email: jeff@lebowski.com

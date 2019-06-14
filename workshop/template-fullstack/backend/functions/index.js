@@ -80,7 +80,7 @@ const submit = async (event, context) => {
       'Access-Control-Allow-Credentials': true,
     },
     body: JSON.stringify({
-      message: 'Email submission received',
+      message: 'success',
       email: data.email,
     }),
   }
