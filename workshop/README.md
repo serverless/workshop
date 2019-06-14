@@ -89,19 +89,27 @@ Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
 
 ## Development Cheatsheet
 
-### `$ sls info`
+```bash
+$ sls info
+```
 
 Get information about the current deployment.
 
-### `$ sls invoke local -f formSubmit`
+```
+$ sls invoke local -f formSubmit
+```
 
 Call the function locally.
 
-### `$ sls deploy`
+```bash
+$ sls deploy
+```
 
 Trigger a CloudFormation Create/Update to deploy all infrastructure in `serverless.yml`
 
-### `$ sls deploy function -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'`
+```bash
+$ sls deploy function -f formSubmit --data '{"name":"jeff","email":"jeff@lebowski"}'
+```
 
 Deploy a single function without triggering a CloudFormation deployment.  This is much faster.
 
