@@ -40,7 +40,6 @@ $ npm i
 
 Then build the front-end application
 
-
 ```bash
 $ npm run build
 ```
@@ -75,8 +74,12 @@ In `/workshop/template-fullstack/backend/` run `deploy` to deploy the backend
 $ serverless deploy
 ```
 
-In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend
+Copy the backend URL
+
+In `/workshop/template-fullstack/backend/` run `client deploy` to deploy the frontend via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
 
 ```bash
 $ serverless client deploy
 ```
+Go to the link, click on `Demo Utilities` and add the API URL.
+
