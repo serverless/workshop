@@ -2,7 +2,7 @@
 
 This guide is for *building*, *testing* and *monitoring* a fullstack application using the Serverless Framework and Serverless Framework Enterprise.  
 
-**UPDATE 07/12/19:**  In July 2019, all of the features of Serverless Framework Enterprise (monitoring, testing, security) will be made available to every Serverless Framework user, within a large free tier.  All of these features will become part of the default Serverless Framework experience, for every user.  In the interim, everyone can now sign up for Serverless Framework Enterprise and use it for free, just follow the instructions below.
+**UPDATE 07/12/19:**  In July 2019, all of the features of Serverless Framework Enterprise (monitoring, testing, security) will be made available to every Serverless Framework user, within a large free tier.  All of these features will become part of the default Serverless Framework experience, and made available to every user.  In the interim, everyone can now sign up for Serverless Framework Enterprise and use it for free, just follow the instructions included in the workshop below.
 
 ## Prerequisites
 
