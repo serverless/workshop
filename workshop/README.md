@@ -1,5 +1,7 @@
 # The Serverless Way - Workshop
 
+This guide is for *building*, *testing* and *monitoring* a fullstack application using the Serverless Framework and Serverless Framework Enterprise.  You can log in and try Serverless Framework Enterprise for free, following the instructions below.
+
 <br/>
 
 ## Prerequisites
