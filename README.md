@@ -1,1 +1,3 @@
-![the serverless way](https://pub-8fajasfdsadf.s3.amazonaws.com/title.png)
+# The Serverless Way
+
+A guide and workshop for teams building serverless applications with the Serverless Framework.
