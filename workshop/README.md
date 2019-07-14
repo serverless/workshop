@@ -236,7 +236,7 @@ provider:
   runtime: nodejs8.10
   region: us-east-1
   environment:
-    foo: ${secret:foo}
+    foo: ${secrets:foo}
 ```
 
 This changes across stages automatically.  Deploy this.
