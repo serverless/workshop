@@ -65,7 +65,7 @@ Make sure you create a `tenant` and then an `app`.
 
 ---
 
-In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/backend/frontend/serverless.yml` change the following...
+In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/frontend/serverless.yml` change the following...
 
 ```yaml
 tenant: mytenant # Put your Tenant name here from your Serverless Framework Enterprise account.
@@ -73,7 +73,7 @@ app: myapp # put your App name here from your Serverless Framework Enterprise ac
 service: myservice # Customize your Service name
 ```
 
-In `/workshop/template-fullstack/backend/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
+In `/workshop/template-fullstack/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
 
 ```yaml
 custom:
@@ -102,7 +102,7 @@ Copy the URL of the function that is listed after successful deploy.
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
+In `/workshop/template-fullstack/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
 
 ```text
 $ serverless deploy
@@ -110,7 +110,7 @@ $ serverless deploy
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
+In `/workshop/template-fullstack/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
 
 ```text
 $ serverless client deploy
