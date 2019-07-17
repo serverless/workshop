@@ -20,12 +20,45 @@ These are the items you will need for the Workshop.
 
 ## Hands-On: Setup
 
+## Note: You will perform the setup and follow the workshop instructions in your Cloud9 environment
+
+The first part of getting set up is to log into Serverless Framework Enterprise, enabling automatic set-up of Metrics, Alerts, Testing and much more, for free.
+
+1. Open **https://dashboard.serverless.com** in your browser
+2. Choose to Log In with GitHub or Google, or Sign Up using an email address.  Verify your email if you are just signing up for the first time.  Note: You may need to login twice if you are registering and verifying your email address.  We give a lot away for free, so we need to make sure you are a real human :)
+3. Choose a username
+4. Select the default app name `myapp` or choose your own.  **Note: this is the `app` value used in the workshop**
+
+---
+
+Once logged into Serverless Dashboard:
+
+1. Your **tenant** is listed in the upper right corner of the browser.  **Note: this is the `tenant` value used in the workshop**
+2. Click your tenant name in the upper right corner of the browser, and click **personal access keys**
+3. Click the **add** button
+4. Type `July17` as the key name, and click the **create** button
+5. Copy your personal access key to be used in the workshop.  This is the only time it will be visible, but if you lose it, you can create another key using the same process.
+6. Click the **done** button
+
+---
+
+In your Cloud9 Environment:
+
+1. Open a terminal window
+2. Save your personal access key in the **SERVERLESS_ACCESS_KEY** environment variable, replacing YOUR_KEY with the value you copied in the previous step.
+
+    ```text
+    $ echo "export SERVERLESS_ACCESS_KEY=YOUR_KEY" >> ~/.bashrc && source ~/.bashrc
+    ```
+3. Keep the terminal window open to complete the workshop
+
+---
+
 Clone `the-serverless-way` repository
 
 ```text
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
-
 ---
 
 There are three Services (a "Service" is a Serverless Framework project), containing functions, a database and a front-end React application.  You must `cd` into each and install the NPM dependencies.
@@ -51,21 +84,7 @@ $ npm run build
 ```
 ---
 
-The last part of getting set up is to log into Serverless Framework Enterprise, enabling automatic set-up of Metrics, Alerts, Testing and much more, for free.
-
-In `/workshop/template-fullstack/backend/functions` run `serverless login`
-
-```text
-$ serverless login
-```
-
-Login or register for Serverless Framework Enterprise.  Verify your email if you are just signing up for the first time.  Note: You may need to login twice if you are registering and verifying your email address.  We give a lot away for free, so we need to make sure you are a real human :)
-
-Make sure you create a `tenant` and then an `app`.
-
----
-
-In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/backend/frontend/serverless.yml` change the following...
+In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/frontend/serverless.yml` change the following...
 
 ```yaml
 tenant: mytenant # Put your Tenant name here from your Serverless Framework Enterprise account.
@@ -73,7 +92,7 @@ app: myapp # put your App name here from your Serverless Framework Enterprise ac
 service: myservice # Customize your Service name
 ```
 
-In `/workshop/template-fullstack/backend/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
+In `/workshop/template-fullstack/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
 
 ```yaml
 custom:
@@ -102,7 +121,7 @@ Copy the URL of the function that is listed after successful deploy.
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
+In `/workshop/template-fullstack/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
 
 ```text
 $ serverless deploy
@@ -110,7 +129,7 @@ $ serverless deploy
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
+In `/workshop/template-fullstack/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
 
 ```text
 $ serverless client deploy
@@ -236,7 +255,7 @@ provider:
   runtime: nodejs8.10
   region: us-east-1
   environment:
-    foo: ${secret:foo}
+    foo: ${secrets:foo}
 ```
 
 This changes across stages automatically.  Deploy this.
