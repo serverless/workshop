@@ -1,4 +1,4 @@
-# Serverless Framework — Workshop
+# Serverless Framework - Workshop
 
 This includes a full-stack example application as well as a walkthrough, to help others learn how to *build*, *test* and *monitor* apps with the Serverless Framework.
 
