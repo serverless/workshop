@@ -43,6 +43,8 @@ class DemoApp extends Component {
     this.updateApi = this.updateApi.bind(this)
     this.generateInvocations = this.generateInvocations.bind(this)
     this.generateRandomError = this.generateRandomError.bind(this)
+    this.generateDurationError = this.generateDurationError.bind(this)
+    this.generateTimeoutError = this.generateTimeoutError.bind(this)
   }
 
   /**
@@ -231,10 +233,7 @@ class DemoApp extends Component {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: 'Sample Error Invocation',
-          email: 'sampleerror@invocations.com'
-        }),
+        body: JSON.stringify({ message: 'random error'}),
       })
     }
 
@@ -248,6 +247,76 @@ class DemoApp extends Component {
 
     runner(() => {
       self.setStatus(`Successfully generated a random function error!`)
+    })
+  }
+
+  /**
+   * Generate Duration Error
+   */
+
+  generateDurationError(event) {
+
+    event.preventDefault()
+
+    const self = this
+
+    // Call API Function
+    const callApi = () => {
+      return fetch(`${this.state.admin.url}?duration=true`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: 'duration error' }),
+      })
+    }
+
+    // Runner Function
+    const runner = async (cb) => {
+      try { await callApi() }
+      catch (error) { console.log(error) }
+      self.setStatus(`Generating a random function error...`)
+      if (cb) return cb()
+    }
+
+    runner(() => {
+      self.setStatus(`Successfully generated a duration error!`)
+    })
+  }
+
+  /**
+   * Generate Timeout Error
+   */
+
+  generateTimeoutError(event) {
+
+    event.preventDefault()
+
+    const self = this
+
+    // Call API Function
+    const callApi = () => {
+      return fetch(`${this.state.admin.url}?timeout=true`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: 'timeout error' }),
+      })
+    }
+
+    // Runner Function
+    const runner = async (cb) => {
+      try { await callApi() }
+      catch (error) { console.log(error) }
+      self.setStatus(`Generating a random function error...`)
+      if (cb) return cb()
+    }
+
+    runner(() => {
+      self.setStatus(`Successfully generated a timeout error!`)
     })
   }
 
@@ -355,23 +424,40 @@ class DemoApp extends Component {
             </div>
           </div>
 
-          {
-            // <div className='admin-section'>
-            //   <div className='admin-section-general'>
-            //     <div className='admin-section-general-description'>
-            //       <div className='admin-label'>
-            //         Generate A Long Running Function
-            //       </div>
-            //       <div>
-            //         This generates an unusually long function duration.
-            //       </div>
-            //     </div>
-            //     <div className='admin-section-general-button'>
-            //       <div className='admin-button'>Generate</div>
-            //     </div>
-            //   </div>
-            // </div>
-          }
+          <div className='admin-section'>
+            <div className='admin-section-general'>
+              <div className='admin-section-general-description'>
+                <div className='admin-label'>
+                  Generate An Unusual Duration
+                </div>
+                <div>
+                  This makes the function run for a long time and generates an "unusual duration" and "appraoching timeout" error.
+                </div>
+              </div>
+              <div className='admin-section-general-button'>
+                <div className='admin-button'
+                onClick={this.generateDurationError}>Generate</div>
+              </div>
+            </div>
+          </div>
+
+          <div className='admin-section'>
+            <div className='admin-section-general'>
+              <div className='admin-section-general-description'>
+                <div className='admin-label'>
+                  Generate A Timeout Error
+                </div>
+                <div>
+                  This makes the function run for longer than the set timeout.
+                </div>
+              </div>
+              <div className='admin-section-general-button'>
+                <div className='admin-button'
+                onClick={this.generateTimeoutError}>Generate</div>
+              </div>
+            </div>
+          </div>
+
 
         </section>
 

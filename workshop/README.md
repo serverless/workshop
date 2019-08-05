@@ -16,7 +16,7 @@ These are the items you will need for the Workshop.
 
 <br/>
 
-## Hands-On: Setup
+## Setup
 
 Clone `the-serverless-way` repository
 
@@ -24,16 +24,25 @@ Clone `the-serverless-way` repository
 $ git clone https://www.github.com/serverless/the-serverless-way
 ```
 
+In the repository, there are a few folders, each containing part of a serverless fullstack application demo.
+
+The demo use-case is a simple form for collecting and saving email signups.  The demo includes a frontend built with React (via Create React App), a REST API containing 1 endpoint built on AWS Lambda and AWS Cloudfront, a DynamoDB database table, as well as a scheduled task.
+
+The frontend also includes a "Demo Utilities" panel which includes a way to send multiple requests to the backend as well as different buttons that will crash the backend, cause it to timeout, cause it to run for an unusually long duration.  The purpose of these is to fill the Serverless Dashboard with data on invocations and errors, as well as to see how the Framework's auto-alerting features work.
+
+**Note:** The `backend-tasks` directory containing the scheduled task is an optional part.  It contains an AWS Lambda that runs on a function and calls your back-end every 5 minutes, and once a day causes the function to generate different errors and alerts so you can see what they look like in the Serverless Dashboard.
+
 ---
 
-In `/workshop/template-fullstack/backend/functions` install npm dependencies.
+In `/backend-restapi` install npm dependencies.
 
 ```text
 $ npm i
 ```
+
 ---
 
-In `/workshop/template-fullstack/frontend` install npm dependencies.
+In `/frontend` install npm dependencies.
 
 ```text
 $ npm i
@@ -47,19 +56,19 @@ $ npm run build
 ```
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `login`
+In `/frontend` run `login`
 
 ```text
 $ serverless login
 ```
 
-Login or register for Serverless Framework Enterprise.  Verify your email if you are just signing up for the first time.
+Login or register for Serverless Framework.  Verify your email if you are just signing up for the first time.
 
 Make sure you create a `tenant` and an `app`.
 
 ---
 
-In `/workshop/template-fullstack/backend/database/serverless.yml`, `/workshop/template-fullstack/backend/functions/serverless.yml` & `/workshop/template-fullstack/backend/frontend/serverless.yml` change the following...
+In `/workshop/database/serverless.yml`, `/workshop/backend-restapi/serverless.yml` & `/workshop/frontend/serverless.yml` change the following...
 
 ```yaml
 tenant: mytenant # Put your tenant name here
@@ -67,7 +76,7 @@ app: myapp # put your app name here
 service: myservice # put your service name here
 ```
 
-In `/workshop/template-fullstack/backend/frontend/serverless.yml` change the bucket name to be universally unique.
+In `/workshop/frontend/serverless.yml` change the bucket name to be universally unique.
 
 ```yaml
 custom:
@@ -77,18 +86,18 @@ custom:
 
 <br/>
 
-## Hands-On: Deployment
+## Deployment
 
 Note: You may need to login twice if you registered for the first time and just verified your email address.
 
-In `/workshop/template-fullstack/backend/database` run `deploy` to deploy the backend database.
+In `/workshop/database` run `deploy` to deploy the backend database.
 
 ```text
 $ serverless deploy --stage dev
 ```
 ---
 
-In `/workshop/template-fullstack/backend/functions` run `deploy` to deploy the backend code.
+In `/workshop/backend-api` run `deploy` to deploy the backend code.
 
 ```text
 $ serverless deploy --stage dev
@@ -98,7 +107,7 @@ Copy the URL of the function that is listed after successful deploy.
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `deploy` to deploy the frontend service to Serverless Framework Enterprise.
+In `/workshop/frontend` run `deploy` to deploy the frontend service to Serverless Framework.
 
 ```text
 $ serverless deploy --stage dev
@@ -106,7 +115,7 @@ $ serverless deploy --stage dev
 
 ---
 
-In `/workshop/template-fullstack/backend/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
+In `/workshop/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
 
 ```text
 $ serverless client deploy
@@ -116,23 +125,23 @@ Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
 
 Enter some information into the submission form.  Review the Developer Tools and inspect the Network request.
 
-Check out the Serverless Framework Enterprise Dashboard to see the invocation.
+Check out the Serverless Framework Dashboard to see the invocation.
 
 <br/>
 
-## Hands-On: Development
+## Development
 
-In `/workshop/template-fullstack/backend/functions`, check to see what has been deployed.
+In `/workshop/backend-restapi`, check to see what has been deployed.
 
 ```text
 $ sls info
 ```
 
-You can also see this information in the Serverless Framework Enterprise Dashboard.
+You can also see this information in the Serverless Framework Dashboard.
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, invoke the live function.
+In `/workshop/backend-restapi`, invoke the live function.
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
@@ -142,7 +151,7 @@ $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, invoke the function locally.
+In `/workshop/backend-restapi`, invoke the function locally.
 
 ```text
 $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@lebowski2"}}'
@@ -152,7 +161,7 @@ $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@l
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, add a log statement to the beginning of your function.
+In `/workshop/backend-restapi`, add a log statement to the beginning of your function.
 
 ```javascript
 console.log('hello world')
@@ -166,7 +175,7 @@ $ sls deploy function -f formSubmit
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, invoke the live function, but also pass in the logs flag.
+In `/workshop/backend-restapi`, invoke the live function, but also pass in the logs flag.
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff3","email":"jeff@lebowski3"}}' -l
@@ -176,7 +185,7 @@ You should see the logs from Cloudwatch come with the response.
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, open up a new CLI session and run this command to stream logs into your CLI.
+In `/workshop/backend-restapi`, open up a new CLI session and run this command to stream logs into your CLI.
 
 ```text
 $ sls logs -f formSubmit -t
@@ -192,7 +201,7 @@ The logs should stream in.
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, remove the log statement and run a full deploy again.
+In `/workshop/backend-restapi`, remove the log statement and run a full deploy again.
 
 ```text
 $ sls deploy --force
@@ -202,7 +211,7 @@ $ sls deploy --force
 
 ---
 
-In `/workshop/template-fullstack/backend/functions`, list recent deployments.
+In `/workshop/backend-restapi`, list recent deployments.
 
 ```text
 $ sls deploy list
@@ -216,7 +225,7 @@ $ sls rollback -t 1476790110568
 
 <br/>
 
-## Hands-On: Stage Set-up
+## Stage Setup
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a `dev`, `qa` and `prod` Stage in your Application.
 
@@ -228,7 +237,7 @@ In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create 
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and create a Secret called `foo`.
 
-In `/workshop/template-fullstack/backend/functions`, put the Secret in the environment variables of the `formSubmit` functions, like this:
+In `/workshop/backend-restapi`, put the Secret in the environment variables of the `formSubmit` functions, like this:
 
 ```yaml
 provider:
@@ -241,19 +250,19 @@ provider:
 
 This changes across stages automatically.  Deploy this.
 
-View the deployment record in Serverless Framework Enterprise.
+View the deployment record in Serverless Framework.
 
 ---
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and add a Safeguard for `allowed-regions`
 
-In `/workshop/template-fullstack/backend/functions`, run a full deployment and look at the Safegaurds outputs.
+In `/workshop/backend-restapi`, run a full deployment and look at the Safegaurds outputs.
 
 <br/>
 
-## Hands-On: Testing
+## Testing
 
-In `/workshop/template-fullstack/backend/functions`, run the test command.
+In `/workshop/backend-restapi`, run the test command.
 
 ```text
 $ sls test
@@ -263,7 +272,7 @@ This uses `serverless.test.yml` to test the live cloud deployment and should ret
 
 ---
 
-Here is what a common coniguration of Serverless Framework looks like in CI/CD.  Source is here:  (CI/CD Workflow For Serverless Apps with CircleCI)[https://serverless.com/blog/ci-cd-workflow-serverless-apps-with-circleci/]
+Here is what a common configuration of Serverless Framework looks like in CI/CD.  Source is here:  (CI/CD Workflow For Serverless Apps with CircleCI)[https://serverless.com/blog/ci-cd-workflow-serverless-apps-with-circleci/]
 
 ```yaml
 jobs:
@@ -303,9 +312,3 @@ jobs:
             - node_modules
           key: dependencies-cache-{{ checksum "package.json" }}
 ```
-
-<br/>
-
-## Follow Along: Operations
-
-In the frontend website, click on `Demo Utilities` on the top right and click the button to generate a few function errors.  Also enter `1000` API Requests.

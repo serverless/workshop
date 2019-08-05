@@ -1,6 +1,6 @@
 tenant: ac360 # Enter your tenant name here
 app: demos # Enter your application name here
-service: fullstack-functions
+service: fullstack-restapi # update
 
 provider:
   name: aws
@@ -18,6 +18,7 @@ provider:
 functions:
   formSubmit:
     handler: index.submit
+    timeout: 6
     events:
       - http:
           path: submit

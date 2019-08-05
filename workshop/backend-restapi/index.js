@@ -7,10 +7,19 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 const submit = async (event, context) => {
 
-  // A hack that crashes the function
+  // If this query param is submitted, the function crashes...
   if (event && event['queryStringParameters'] && event['queryStringParameters']['error']) {
-    let r = Math.random().toString(36).substring(7);
-    throw new Error(`Self-inflicted function crash: ${r}`)
+    crash()
+  }
+
+  // If this query param is submitted, the function runs for an unusually long time...
+  if (event && event['queryStringParameters'] && event['queryStringParameters']['duration']) {
+    await sleep(5800)
+  }
+
+  // If this query param is submitted, the function times out
+  if (event && event['queryStringParameters'] && event['queryStringParameters']['timeout']) {
+    await sleep(20000)
   }
 
   // Set default event body
@@ -34,6 +43,7 @@ const submit = async (event, context) => {
 
   // If no database, throw an error
   if (!process.env.database_submissions_name) {
+    console.error('Database not found.')
     return {
       statusCode: 500,
       headers: {
@@ -87,3 +97,16 @@ const submit = async (event, context) => {
 }
 
 module.exports = { submit }
+
+/**
+ * Demo Utility Functions
+ */
+
+const crash = () => {
+  let r = Math.random().toString(36).substring(7)
+  throw new Error(`Self-inflicted function crash: ${r}`)
+}
+
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
