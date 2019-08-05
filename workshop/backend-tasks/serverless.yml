@@ -1,0 +1,17 @@
+tenant: ac360 # Enter your tenant name here
+app: demos # Enter your application name here
+service: fullstack-tasks # update
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  environment:
+    url: ${secrets:test_endpoint}
+
+functions:
+  testEndpoint:
+    handler: handler.testEndpoint
+    events:
+      - schedule: rate(5 minutes)
