@@ -10,8 +10,7 @@ The landing page also has a Utility Panel, which contains ways to call your API,
 
 ![Example Preview 2](https://s3.amazonaws.com/assets.github.serverless/workshop/serverless-framework-workshop-example-utils.png)
 
-
-
+<br/>
 
 ## Prerequisites
 
@@ -19,20 +18,20 @@ These are the items you will need for the Workshop.
 
 * **Amazon Web Services Accounts –** Each developer must have their own AWS account which they can freely deploy into and treat as a general sandbox.  Sharing accounts can and most often will result in collision of infrastructure resource names as well as API throttle limits on provisioning of infrastructure resources.  Every workshop we've ever done where the participants shared accounts has resulted in those problems mentioned, so please ensure your developers can have their own accounts, so we can focus our time on building and operating serverless applications.  (Keep in mind these developer accounts are for sandbox use only. In the workshop, we will discuss how to control and govern access to the AWS accounts that run your mission critical infrastructure and environments.)  Sign up for an AWS account here: https://aws.amazon.com/
 
+* **Amazon Web Services Account Credentials** – Each developer must have Access Keys to their own AWS account with Admin Access.  These Access Keys must be saved on the developer's machine.  The Serverless Framework will use these to provision resources on the account.  You can learn how to create these Access Keys here: https://serverless.com/framework/docs/providers/aws/guide/credentials/
+
 * **Node.js** – Each developer must have the current LTS version of Node.js installed on their machine. You can find it here:  https://nodejs.org/en/download/
 
 * **Serverless Framework** – Each developer must have the current LTS version of Node.js installed on their machine. You can learn how to install the Serverless Framework here:  https://serverless.com/framework/docs/providers/aws/guide/installation/
-
-* **Amazon Web Services Account Credentials** – Each developer must have Access Keys to their own AWS account with Admin Access.  These Access Keys must be saved on the developer's machine.  The Serverless Framework will use these to provision resources on the account.  You can learn how to create these Access Keys here: https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
 <br/>
 
 ## Setup
 
-Clone `the-serverless-way` repository
+Clone this repository
 
 ```text
-$ git clone https://www.github.com/serverless/the-serverless-way
+$ git clone https://www.github.com/serverless/workshop
 ```
 
 In the repository, there are a few folders, each containing part of a serverless fullstack application demo.
@@ -78,7 +77,7 @@ Make sure you create a `tenant` and then an `app`.
 
 ---
 
-In `/workshop/database/serverless.yml`, `/workshop/backend-restapi/serverless.yml` & `/workshop/frontend/serverless.yml` change the following...
+In `/database/serverless.yml`, `/backend-restapi/serverless.yml` & `/frontend/serverless.yml` change the following...
 
 ```yaml
 tenant: mytenant # Put your Tenant name here from your Serverless Framework Enterprise account.
@@ -86,7 +85,7 @@ app: myapp # put your App name here from your Serverless Framework Enterprise ac
 service: myservice # Customize your Service name
 ```
 
-In `/workshop/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
+In `/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
 
 ```yaml
 custom:
@@ -100,14 +99,14 @@ custom:
 
 Note: You may need to login twice if you registered for the first time and just verified your email address.
 
-In `/workshop/database` run `deploy` to deploy the backend database.
+In `/database` run `deploy` to deploy the backend database.
 
 ```text
 $ serverless deploy
 ```
 ---
 
-In `/workshop/backend-api` run `deploy` to deploy the backend code.
+In `/backend-api` run `deploy` to deploy the backend code.
 
 ```text
 $ serverless deploy
@@ -117,7 +116,7 @@ Copy the URL of the function that is listed after successful deploy.
 
 ---
 
-In `/workshop/frontend` run `deploy` to deploy the frontend service to Serverless Framework.
+In `/frontend` run `deploy` to deploy the frontend service to Serverless Framework.
 
 ```text
 $ serverless deploy
@@ -125,7 +124,7 @@ $ serverless deploy
 
 ---
 
-In `/workshop/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
+In `/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
 
 ```text
 $ serverless client deploy
@@ -141,7 +140,7 @@ Check out the Serverless Framework Dashboard to see the invocation.  The Dashboa
 
 ## Development
 
-In `/workshop/backend-restapi`, check to see what has been deployed.
+In `/backend-restapi`, check to see what has been deployed.
 
 ```text
 $ sls info
@@ -153,7 +152,7 @@ You can also see this information in the Serverless Framework Dashboard.
 
 Here are some handy ways to develop and test your Serverless Application.
 
-In `/workshop/backend-restapi`, invoke the live function via this command:
+In `/backend-restapi`, invoke the live function via this command:
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
@@ -163,7 +162,7 @@ $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski
 
 ---
 
-In `/workshop/backend-restapi`, invoke the function locally.
+In `/backend-restapi`, invoke the function locally.
 
 ```text
 $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@lebowski2"}}'
@@ -173,7 +172,7 @@ $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@l
 
 ---
 
-In `/workshop/backend-restapi`, add a log statement to the beginning of your function.
+In `/backend-restapi`, add a log statement to the beginning of your function.
 
 ```javascript
 console.log('hello world')
@@ -187,7 +186,7 @@ $ sls deploy function -f formSubmit
 
 ---
 
-In `/workshop/backend-restapi`, invoke the live function, but also pass in the logs flag.
+In `/backend-restapi`, invoke the live function, but also pass in the logs flag.
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff3","email":"jeff@lebowski3"}}' -l
@@ -197,7 +196,7 @@ You should see the logs from Cloudwatch come with the response.
 
 ---
 
-In `/workshop/backend-restapi`, open up a new CLI session and run this command to stream logs into your CLI.
+In `/backend-restapi`, open up a new CLI session and run this command to stream logs into your CLI.
 
 ```text
 $ sls logs -f formSubmit -t
@@ -213,7 +212,7 @@ The logs should stream in.
 
 ---
 
-In `/workshop/backend-restapi`, remove the log statement and run a full deploy again.
+In `/backend-restapi`, remove the log statement and run a full deploy again.
 
 ```text
 $ sls deploy --force
@@ -223,7 +222,7 @@ $ sls deploy --force
 
 ---
 
-In `/workshop/backend-restapi`, list recent deployments.
+In `/backend-restapi`, list recent deployments.
 
 ```text
 $ sls deploy list
@@ -253,7 +252,7 @@ In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create 
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and create a Secret called `foo`.
 
-In `/workshop/backend-restapi`, put the Secret in the environment variables of the `formSubmit` functions, like this:
+In `/backend-restapi`, put the Secret in the environment variables of the `formSubmit` functions, like this:
 
 ```yaml
 provider:
@@ -272,13 +271,13 @@ View the deployment record in Serverless Framework.
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and add a Safeguard for `allowed-regions`
 
-In `/workshop/backend-restapi`, run a full deployment and look at the Safegaurds outputs.
+In `/backend-restapi`, run a full deployment and look at the Safegaurds outputs.
 
 <br/>
 
 ## Testing
 
-In `/workshop/backend-restapi`, run the test command.
+In `/backend-restapi`, run the test command.
 
 ```text
 $ sls test
