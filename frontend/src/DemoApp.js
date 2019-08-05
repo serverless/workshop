@@ -57,7 +57,7 @@ class DemoApp extends Component {
     let data = localStorage.getItem('demoapp')
     data = data ? JSON.parse(data) : {}
     this.setState({ admin: { ...this.state.admin, ...{ url: data.url }}}, () => {
-      console.log('Serverless Enterprise Demo App Initialized')
+      console.log('Serverless Framework Demo App Initialized')
       console.log(this.state)
 
       // Initial Session Status
@@ -345,7 +345,7 @@ class DemoApp extends Component {
 
           <div className='admin-logo'>
             <img src={logo} alt="logo" />
-            Serverless Framework Enterprise - Demo Utilities
+            Serverless Framework - Demo Utilities
           </div>
 
           <div className='admin-section'

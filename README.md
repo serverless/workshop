@@ -2,6 +2,17 @@
 
 This includes a full-stack example application as well as a walkthrough, to help others learn how to *build*, *test* and *monitor* apps with the Serverless Framework.
 
+You will be building a landing page with an email submission form:
+
+![Example Preview](https://s3.amazonaws.com/assets.github.serverless/workshop/serverless-framework-workshop-example.png)
+
+The landing page also has a Utility Panel, which contains ways to call your API, cause it to behave strangely, or even crash it.  The purpose of this is to fill the [Serverless Framework Dashboard](https://dashboard.serverless.com) with data and alerts, for demonstration purposes:
+
+![Example Preview 2](https://s3.amazonaws.com/assets.github.serverless/workshop/serverless-framework-workshop-example-utils.png)
+
+
+
+
 ## Prerequisites
 
 These are the items you will need for the Workshop.
