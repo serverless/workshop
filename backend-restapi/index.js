@@ -28,7 +28,11 @@ const submit = async (event, context) => {
   data = typeof data === 'string' ? JSON.parse(data) : data
 
   // If no data, throw an error
-  if (!data) {
+  if (!data ||
+    typeof data !== 'object' ||
+    !data.email ||
+    !data.name) {
+    console.error('Data not included in response body.')
     return {
       statusCode: 400,
       headers: {
@@ -70,6 +74,7 @@ const submit = async (event, context) => {
   try {
     result = await dynamoDb.put(params).promise()
   } catch(error) {
+    console.error('DyanmoDB PUT error' + error.message)
     return {
       statusCode: 500,
       headers: {
