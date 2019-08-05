@@ -1,6 +1,6 @@
 # The Serverless Way - Workshop
 
-<br/>
+This guide is for *building*, *testing* and *monitoring* a fullstack application using the Serverless Framework.
 
 ## Prerequisites
 
@@ -39,7 +39,6 @@ In `/backend-restapi` install npm dependencies.
 ```text
 $ npm i
 ```
-
 ---
 
 In `/frontend` install npm dependencies.
@@ -49,7 +48,7 @@ $ npm i
 ```
 ---
 
-Build the front-end application.
+The front-end application is a React application.  Run `npm run build` to build the front-end application.
 
 ```text
 $ npm run build
@@ -64,19 +63,19 @@ $ serverless login
 
 Login or register for Serverless Framework.  Verify your email if you are just signing up for the first time.
 
-Make sure you create a `tenant` and an `app`.
+Make sure you create a `tenant` and then an `app`.
 
 ---
 
 In `/workshop/database/serverless.yml`, `/workshop/backend-restapi/serverless.yml` & `/workshop/frontend/serverless.yml` change the following...
 
 ```yaml
-tenant: mytenant # Put your tenant name here
-app: myapp # put your app name here
-service: myservice # put your service name here
+tenant: mytenant # Put your Tenant name here from your Serverless Framework Enterprise account.
+app: myapp # put your App name here from your Serverless Framework Enterprise account.
+service: myservice # Customize your Service name
 ```
 
-In `/workshop/frontend/serverless.yml` change the bucket name to be universally unique.
+In `/workshop/frontend/serverless.yml` change the bucket name to be universally unique, since all AWS S3 buckets must have unique names.
 
 ```yaml
 custom:
@@ -93,14 +92,14 @@ Note: You may need to login twice if you registered for the first time and just 
 In `/workshop/database` run `deploy` to deploy the backend database.
 
 ```text
-$ serverless deploy --stage dev
+$ serverless deploy
 ```
 ---
 
 In `/workshop/backend-api` run `deploy` to deploy the backend code.
 
 ```text
-$ serverless deploy --stage dev
+$ serverless deploy
 ```
 
 Copy the URL of the function that is listed after successful deploy.
@@ -110,22 +109,22 @@ Copy the URL of the function that is listed after successful deploy.
 In `/workshop/frontend` run `deploy` to deploy the frontend service to Serverless Framework.
 
 ```text
-$ serverless deploy --stage dev
+$ serverless deploy
 ```
 
 ---
 
-In `/workshop/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch)
+In `/workshop/frontend` run `client deploy` to deploy the website via the [Serverless Finch Plugin](https://github.com/fernando-mc/serverless-finch).   Make sure you ran the build command first, in the step above.
 
 ```text
 $ serverless client deploy
 ```
 
-Go to the link, click on `Demo Utilities` and add the API URL in the side panel.
+After you deploy the front-end, go to the live website URL which is returned to you after you deploy with `serverless-finch`, click on `Demo Utilities` and add the API URL in the side panel.  This is given to you after successful deploy of the `/functions` Service.  Run `serverless info` in the `/functions` Service to see your API endpoint at any time.
 
-Enter some information into the submission form.  Review the Developer Tools and inspect the Network request.
+Test the application by entering some information into the submission form.  Review the Developer Tools and inspect the Network request.
 
-Check out the Serverless Framework Dashboard to see the invocation.
+Check out the Serverless Framework Dashboard to see the invocation.  The Dashboard link should appear in your `/backend-restapi` Service after deployment.  Or, just go to [https://dashboard.serverless.com](https://dashboard.serverless.com)
 
 <br/>
 
@@ -141,7 +140,9 @@ You can also see this information in the Serverless Framework Dashboard.
 
 ---
 
-In `/workshop/backend-restapi`, invoke the live function.
+Here are some handy ways to develop and test your Serverless Application.
+
+In `/workshop/backend-restapi`, invoke the live function via this command:
 
 ```text
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
@@ -226,6 +227,10 @@ $ sls rollback -t 1476790110568
 <br/>
 
 ## Stage Setup
+
+Within Serverless Framework Enterprise, you can set Stages for each Application, which all of its Services can use.
+
+In each Stage, you can set Secrets (sensitive information, like keys), Safeguards (policies) and Notification settings for all Services.
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a `dev`, `qa` and `prod` Stage in your Application.
 
