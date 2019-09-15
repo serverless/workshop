@@ -24,7 +24,10 @@ const testEndpoint = (event, context, callback) => {
   async function httpRequest() {
     let res = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ message: 'Scheduled requests' })
+      body: JSON.stringify({
+        name: 'Scheduled Request',
+        email: 'scheduled@request.com'
+      })
     })
     if (res.ok) {
       return res

@@ -1,3 +1,14 @@
+
+
+* Greet
+* Serverless Framework builds AND Manages (this is new)
+* In this demo, building a fullstack app
+* Covering LOTS of features.
+* Q&A at the end.
+
+
+
+
 # Serverless Framework - Workshop
 
 This includes a full-stack example application as well as a walkthrough, to help others learn how to *build*, *test* and *monitor* apps with the Serverless Framework.
@@ -49,6 +60,7 @@ In `/backend-restapi` install npm dependencies.
 ```text
 $ npm i
 ```
+
 ---
 
 In `/frontend` install npm dependencies.
@@ -56,13 +68,21 @@ In `/frontend` install npm dependencies.
 ```text
 $ npm i
 ```
+
 ---
 
-The front-end application is a React application.  Run `npm run build` to build the front-end application.
+The front-end application is a React application.  Run `npm run build` to build the front-end application so that it's ready to deploy.
 
 ```text
 $ npm run build
 ```
+
+The front-end application is a React application.  Run `npm run start` to run the front-end application locally.
+
+```text
+$ npm run start
+```
+
 ---
 
 In `/frontend` run `login`
@@ -104,6 +124,8 @@ In `/database` run `deploy` to deploy the backend database.
 ```text
 $ serverless deploy
 ```
+
+You will need to deploy this first in order for the outputs to be available to `backend-restapi`.
 ---
 
 In `/backend-api` run `deploy` to deploy the backend code.
@@ -132,6 +154,12 @@ $ serverless client deploy
 
 After you deploy the front-end, go to the live website URL which is returned to you after you deploy with `serverless-finch`, click on `Demo Utilities` and add the API URL in the side panel.  This is given to you after successful deploy of the `/functions` Service.  Run `serverless info` in the `/functions` Service to see your API endpoint at any time.
 
+---
+
+**See Everything In The Dashboard**
+
+View everything that was just deployed in the dashboard - https://dashboard.serverless.com
+
 Test the application by entering some information into the submission form.  Review the Developer Tools and inspect the Network request.
 
 Check out the Serverless Framework Dashboard to see the invocation.  The Dashboard link should appear in your `/backend-restapi` Service after deployment.  Or, just go to [https://dashboard.serverless.com](https://dashboard.serverless.com)
@@ -146,8 +174,6 @@ In `/backend-restapi`, check to see what has been deployed.
 $ sls info
 ```
 
-You can also see this information in the Serverless Framework Dashboard.
-
 ---
 
 Here are some handy ways to develop and test your Serverless Application.
@@ -158,8 +184,6 @@ In `/backend-restapi`, invoke the live function via this command:
 $ sls invoke -f formSubmit --data '{"body":{"name":"jeff","email":"jeff@lebowski"}}'
 ```
 
-(You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
-
 ---
 
 In `/backend-restapi`, invoke the function locally.
@@ -167,8 +191,6 @@ In `/backend-restapi`, invoke the function locally.
 ```text
 $ sls invoke local -f formSubmit --data '{"body":{"name":"jeff2","email":"jeff@lebowski2"}}'
 ```
-
-(You can check the DynamoDB table to see if this was saved in the AWS Dashboard)
 
 ---
 
@@ -230,13 +252,47 @@ $ sls deploy list
 
 Timestamps are used to identify deployments.  The Framework saves old CloudFormation templates for you.  You can use them to rollback.  This is great if you get into trouble.
 
+Alternatively, you can also see recent deployments in the Serverless Dashboard.
+
 ```text
 $ sls rollback -t 1476790110568
 ```
 
 <br/>
 
+## Operations
+
+### Deployment Difference
+
+Add `environment` variable `foo:bar` in serverless.yml and redeploy.  Review the change in the deployment record in the dashboard.
+
+See the dashed lines on the charts in the Dashboard indicating deployments.
+
+### Multiple Requests
+
+Use the Demo Utils to send multiple requests.
+
+See them in the Dashboard.
+
+### Charts: Invocations & Errors
+
+Click on the invocations and errors charts
+
+### Alert: Generate A Function Error
+
+### Alert: Approaching Timeout Error
+
+### Alert: Timeout Error
+
+### Alert: Unusual Error Rate
+
+### Invocation Explorer
+
+<br/>
+
 ## Stage Setup
+
+### Profile
 
 Within Serverless Framework Enterprise, you can set Stages for each Application, which all of its Services can use.
 
@@ -249,6 +305,8 @@ In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], create a Profile for development called `profile-dev` and associate it with your Application's `dev` stage.
 
 ---
+
+### Secrets
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and create a Secret called `foo`.
 
@@ -267,11 +325,34 @@ This changes across stages automatically.  Deploy this.
 
 View the deployment record in Serverless Framework.
 
+### Notifications
+
 ---
 
 In (https://dashboard.serverless.com)[https://dashboard.serverless.com], go to your Profile for development called `profile-dev` and add a Safeguard for `allowed-regions`
 
 In `/backend-restapi`, run a full deployment and look at the Safegaurds outputs.
+
+---
+
+### Safeguards
+
+
+# Q&A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br/>
 

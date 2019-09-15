@@ -27,6 +27,8 @@ const submit = async (event, context) => {
   // Parse, if necessary
   data = typeof data === 'string' ? JSON.parse(data) : data
 
+  console.log(data)
+
   // If no data, throw an error
   if (!data ||
     typeof data !== 'object' ||
