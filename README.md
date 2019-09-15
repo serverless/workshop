@@ -1,14 +1,3 @@
-
-
-* Greet
-* Serverless Framework builds AND Manages (this is new)
-* In this demo, building a fullstack app
-* Covering LOTS of features.
-* Q&A at the end.
-
-
-
-
 # Serverless Framework - Workshop
 
 This includes a full-stack example application as well as a walkthrough, to help others learn how to *build*, *test* and *monitor* apps with the Serverless Framework.
