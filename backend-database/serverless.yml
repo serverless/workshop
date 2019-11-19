@@ -1,4 +1,4 @@
-tenant: ac360 # Enter your tenant name here
+org: ac360 # Enter your tenant name here
 app: demos # Enter your application name here
 service: fullstack-database
 
