@@ -7,13 +7,13 @@ provider:
   runtime: nodejs8.10
   region: us-east-1
   environment:
-    database_submissions_name: ${output:fullstack-database.database_submissions_name}
-    database_submissions_region: ${output:fullstack-database.database_submissions_region}
+    database_submissions_name: ${output::${param:env}::fullstack-database.database_submissions_name}
+    database_submissions_region: ${output::${param:env}::fullstack-database.database_submissions_region}
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:PutItem
-      Resource: "arn:aws:dynamodb:*:*:table/${output:fullstack-database.database_submissions_name}"
+      Resource: "arn:aws:dynamodb:*:*:table/${output::${param:env}::fullstack-database.database_submissions_name}"
 
 functions:
   formSubmit:
